@@ -4,7 +4,7 @@ import { useDosMembership } from "@/contexts/dos-membership-context"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import ChatComponent from "@/components/chat-component" // Assuming this component exists
+import ChatComponent from "@/components/chat-component"
 
 export default function ChatPage() {
   const { isDosMember } = useDosMembership()

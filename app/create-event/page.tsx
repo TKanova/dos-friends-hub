@@ -1,9 +1,12 @@
 "use client"
 
 import { useDosMembership } from "@/contexts/dos-membership-context"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
 
 export default function CreateEventPage() {
   const { isDosMember } = useDosMembership()
@@ -29,87 +32,34 @@ export default function CreateEventPage() {
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">Create New Event</CardTitle>
         </CardHeader>
-        <CardContent>
-          <form className="space-y-6">
-            <div>
-              <label htmlFor="eventName" className="block text-sm font-medium text-gray-700">
-                Event Name
-              </label>
-              <input
-                type="text"
-                id="eventName"
-                name="eventName"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                placeholder="e.g., Summer Music Festival"
-                required
-              />
+        <CardContent className="space-y-6">
+          <div className="space-y-2">
+            <Label htmlFor="event-name">Event Name</Label>
+            <Input id="event-name" placeholder="e.g., Summer Music Festival" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="event-description">Description</Label>
+            <Textarea id="event-description" placeholder="Tell us about your event..." rows={5} />
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-2">
+              <Label htmlFor="event-date">Date</Label>
+              <Input id="event-date" type="date" />
             </div>
-            <div>
-              <label htmlFor="eventDate" className="block text-sm font-medium text-gray-700">
-                Date
-              </label>
-              <input
-                type="date"
-                id="eventDate"
-                name="eventDate"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                required
-              />
+            <div className="space-y-2">
+              <Label htmlFor="event-time">Time</Label>
+              <Input id="event-time" type="time" />
             </div>
-            <div>
-              <label htmlFor="eventTime" className="block text-sm font-medium text-gray-700">
-                Time
-              </label>
-              <input
-                type="time"
-                id="eventTime"
-                name="eventTime"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="eventLocation" className="block text-sm font-medium text-gray-700">
-                Location
-              </label>
-              <input
-                type="text"
-                id="eventLocation"
-                name="eventLocation"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                placeholder="e.g., Central Park, New York"
-                required
-              />
-            </div>
-            <div>
-              <label htmlFor="eventDescription" className="block text-sm font-medium text-gray-700">
-                Description
-              </label>
-              <textarea
-                id="eventDescription"
-                name="eventDescription"
-                rows={4}
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                placeholder="Tell us more about your event..."
-                required
-              ></textarea>
-            </div>
-            <div>
-              <label htmlFor="eventImage" className="block text-sm font-medium text-gray-700">
-                Event Image URL
-              </label>
-              <input
-                type="url"
-                id="eventImage"
-                name="eventImage"
-                className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary focus:border-primary"
-                placeholder="e.g., https://example.com/image.jpg"
-              />
-            </div>
-            <Button type="submit" className="w-full">
-              Create Event
-            </Button>
-          </form>
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="event-location">Location</Label>
+            <Input id="event-location" placeholder="e.g., Central Park, New York" />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="event-image">Image URL</Label>
+            <Input id="event-image" placeholder="e.g., https://example.com/event-banner.jpg" />
+          </div>
+          <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Create Event</Button>
         </CardContent>
       </Card>
     </div>

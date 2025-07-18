@@ -2,6 +2,7 @@
 
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Search } from "lucide-react"
 
 interface SearchFiltersProps {
   searchTerm: string
@@ -19,16 +20,19 @@ export default function SearchFilters({
   categories,
 }: SearchFiltersProps) {
   return (
-    <div className="flex flex-col md:flex-row gap-4 mb-8">
-      <Input
-        type="text"
-        placeholder="Search events..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="flex-grow"
-      />
+    <div className="flex flex-col sm:flex-row gap-4 mb-8">
+      <div className="relative flex-1">
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+        <Input
+          type="text"
+          placeholder="Search events..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="pl-10 w-full"
+        />
+      </div>
       <Select value={selectedCategory} onValueChange={setSelectedCategory}>
-        <SelectTrigger className="w-full md:w-[180px]">
+        <SelectTrigger className="w-full sm:w-[180px]">
           <SelectValue placeholder="Select Category" />
         </SelectTrigger>
         <SelectContent>

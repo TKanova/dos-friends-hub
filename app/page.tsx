@@ -3,6 +3,9 @@
 import { useState } from "react"
 import EventCard from "@/components/event-card"
 import SearchFilters from "@/components/search-filters"
+import { Button } from "@/components/ui/button"
+import Link from "next/link"
+import { Rocket, Users, MessageCircle, HeartHandshake } from "lucide-react" // Icons for reasons
 
 interface Event {
   id: string
@@ -115,7 +118,79 @@ export default function HomePage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8 text-center">Discover Events</h1>
+      {/* Hero Section */}
+      <div className="text-center space-y-4 mb-12 p-8 rounded-lg bg-gradient-to-br from-background to-muted shadow-lg">
+        <h1 className="text-5xl font-extrabold text-primary">Welcome DOS</h1>
+        <p className="text-xl text-black max-w-2xl mx-auto">
+          Find a dos or doses to enjoy events together. Comment, choose, visit on events and we'll match you with best
+          partner for the fun - or browse it for yourself!
+        </p>
+        <p className="text-lg text-gray-600">Choose from over 1,100 active events in our country</p>
+      </div>
+
+      {/* Why find your best DOS fit? Section */}
+      <section className="py-12 bg-secondary text-secondary-foreground rounded-lg mb-12">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-8">Why find your best DOS fit?</h2>
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="flex flex-col items-center space-y-4 p-6 bg-secondary/80 rounded-lg shadow-md">
+              <Users className="h-12 w-12 text-primary" />
+              <h3 className="text-2xl font-semibold">Connect Deeper</h3>
+              <p className="text-center text-lg">
+                Find like-minded individuals who share your passions and interests for events.
+              </p>
+            </div>
+            <div className="flex flex-col items-center space-y-4 p-6 bg-secondary/80 rounded-lg shadow-md">
+              <HeartHandshake className="h-12 w-12 text-primary" />
+              <h3 className="text-2xl font-semibold">Enhanced Experiences</h3>
+              <p className="text-center text-lg">
+                Enjoy events more with a compatible partner, making every moment memorable.
+              </p>
+            </div>
+            <div className="flex flex-col items-center space-y-4 p-6 bg-secondary/80 rounded-lg shadow-md">
+              <Rocket className="h-12 w-12 text-primary" />
+              <h3 className="text-2xl font-semibold">Effortless Matching</h3>
+              <p className="text-center text-lg">Our system helps you find your ideal DOS, so you can focus on fun.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* How to find the right DOS Section */}
+      <section className="py-12 mb-12">
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-4xl font-bold mb-8">How to find the right DOS</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="flex flex-col items-center space-y-4 p-8 bg-card rounded-lg shadow-md">
+              <Users className="h-12 w-12 text-primary" />
+              <h3 className="text-2xl font-semibold">Get matched</h3>
+              <p className="text-center text-muted-foreground">
+                Tell us a bit about yourself and be active in the comments! We'll recommend you to your best fit.
+              </p>
+              <Link href="/about-membership" prefetch={false}>
+                <Button variant="link" className="text-primary hover:underline">
+                  Get matched →
+                </Button>
+              </Link>
+            </div>
+            <div className="flex flex-col items-center space-y-4 p-8 bg-card rounded-lg shadow-md">
+              <MessageCircle className="h-12 w-12 text-primary" />
+              <h3 className="text-2xl font-semibold">Browse forum</h3>
+              <p className="text-center text-muted-foreground">
+                Explore our Friends' Forum - you can filter by categories and join discussions.
+              </p>
+              <Link href="/chat" prefetch={false}>
+                <Button variant="link" className="text-primary hover:underline">
+                  Browse forum →
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Discover Events Section */}
+      <h2 className="text-3xl font-bold mb-6 text-center">Discover Events</h2>
       <SearchFilters
         searchTerm={searchTerm}
         setSearchTerm={setSearchTerm}

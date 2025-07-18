@@ -1,29 +1,46 @@
 "use client"
 
 import Link from "next/link"
-import { MountainIcon } from "lucide-react" // Assuming Lucide React is available
+import Image from "next/image"
+import { usePathname } from "next/navigation"
+import { Button } from "@/components/ui/button"
 
 export default function Header() {
+  const pathname = usePathname()
+  const nav = [
+    { href: "/", label: "Home" },
+    { href: "/create-event", label: "Create Event" },
+    { href: "/my-rsvps", label: "My RSVPs" },
+    { href: "/chat", label: "Chat" },
+  ]
+
   return (
-    <header className="bg-primary text-primary-foreground py-4 px-6 flex items-center justify-between">
-      <Link href="/" className="flex items-center gap-2" prefetch={false}>
-        <MountainIcon className="h-6 w-6" />
-        <span className="text-lg font-semibold">DOS – Friend’s Hub</span>
-      </Link>
-      <nav className="flex items-center gap-4">
-        <Link href="/" className="hover:underline" prefetch={false}>
-          Home
+    <header className="border-b bg-primary text-primary-foreground">
+      <div className="container flex items-center justify-between h-16">
+        <Link href="/" className="flex items-center gap-2" prefetch={false}>
+          <Image src="/oslogo.png" alt="DOS Friends' Hub Logo" width={40} height={40} className="rounded-md" />
+          <span className="font-bold text-xl">DOS Hub</span>
         </Link>
-        <Link href="/create-event" className="hover:underline" prefetch={false}>
-          Create Event
+
+        <nav className="hidden sm:flex gap-6">
+          {nav.map((n) => (
+            <Link
+              key={n.href}
+              href={n.href}
+              className={`hover:underline ${pathname === n.href ? "font-semibold" : ""}`}
+              prefetch={false}
+            >
+              {n.label}
+            </Link>
+          ))}
+        </nav>
+
+        <Link href="/about-membership" prefetch={false}>
+          <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
+            Get started - it's free
+          </Button>
         </Link>
-        <Link href="/my-rsvps" className="hover:underline" prefetch={false}>
-          My RSVPs
-        </Link>
-        <Link href="/chat" className="hover:underline" prefetch={false}>
-          Chat
-        </Link>
-      </nav>
+      </div>
     </header>
   )
 }

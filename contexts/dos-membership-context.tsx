@@ -1,7 +1,6 @@
 "use client"
 
-import type React from "react"
-import { createContext, useContext, useState, useEffect, useCallback } from "react"
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 
 interface DosMembershipContextType {
   isDosMember: boolean
@@ -10,23 +9,23 @@ interface DosMembershipContextType {
 
 const DosMembershipContext = createContext<DosMembershipContextType | undefined>(undefined)
 
-export const DosMembershipProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const DosMembershipProvider = ({ children }: { children: ReactNode }) => {
   const [isDosMember, setIsDosMember] = useState(false)
 
   useEffect(() => {
-    // Check local storage for membership status on initial load
-    const storedStatus = localStorage.getItem("isDosMember")
-    if (storedStatus === "true") {
+    // Check local storage for membership status on mount
+    const memberStatus = localStorage.getItem("isDosMember")
+    if (memberStatus === "true") {
       setIsDosMember(true)
     }
   }, [])
 
-  const becomeDosMember = useCallback(() => {
+  const becomeDosMember = () => {
     setIsDosMember(true)
     localStorage.setItem("isDosMember", "true")
-    // Optionally, you could redirect or show a success message here
-    alert("Congratulations! You are now a DOS Member!")
-  }, [])
+    // Optionally, redirect or show a success message
+    alert("Congratulations! You are now a DOS Member.")
+  }
 
   return (
     <DosMembershipContext.Provider value={{ isDosMember, becomeDosMember }}>{children}</DosMembershipContext.Provider>
