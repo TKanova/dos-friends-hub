@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Chat - DOS Friend's Hub</title>
+    <meta name="description" content="Connect with other community members in real-time chat rooms organized by interests and event categories.">
+    <link rel="canonical" href="https://dosfriendshub.com/chat">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Skip to main content -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-orange-500 text-white px-4 py-2 rounded-lg z-50">
+        Skip to main content
+    </a>
+
+    <!-- Header -->
+    <header role="banner" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2" aria-label="DOS Friend's Hub Home">
+                        <img src="/placeholder.svg?height=40&width=40" alt="DOS Logo" class="h-10 w-10" width="40" height="40">
+                        <span class="text-2xl font-bold text-gray-900">
+                            DOS <span class="text-orange-500">Friend's Hub</span>
+                        </span>
+                    </a>
+                </div>
+
+                <nav role="navigation" aria-label="Main navigation" class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Home</a>
+                    <a href="/categories" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Categories</a>
+                    <a href="/create-event" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Create Event</a>
+                    <a href="/my-rsvps" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">My RSVPs</a>
+                    <a href="/chat" class="text-orange-500 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Chat</a>
+                    
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-700">Welcome, User!</span>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors duration-200">Logout</button>
+                    </div>
+                </nav>
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-gray-700 hover:text-orange-500 hover:bg-gray-100" aria-label="Open mobile menu">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="Breadcrumb" class="mb-6">
+                <ol class="flex items-center space-x-2 text-sm text-gray-500">
+                    <li><a href="/" class="hover:text-orange-500">Home</a></li>
+                    <li>
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </li>
+                    <li class="text-gray-900" aria-current="page">Community Chat</li>
+                </ol>
+            </nav>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden" style="height: calc(100vh - 200px);">
+                <div class="flex h-full">
+                    <!-- Sidebar -->
+                    <aside class="w-64 bg-gray-50 border-r border-gray-200 flex flex-col" role="complementary" aria-label="Chat channels">
+                        <!-- Sidebar Header -->
+                        <div class="p-4 border-b border-gray-200">
+                            <h1 class="text-lg font-semibold text-gray-900 mb-1">Community Chat</h1>
+                            <div class="flex items-center text-sm text-gray-600">
+                                <svg class="mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                                </svg>
+                                <span id="online-count">47 online</span>
+                            </div>
+                        </div>
+
+                        <!-- Channels List -->
+                        <div class="flex-1 overflow-y-auto p-2">
+                            <nav aria-label="Chat channels">
+                                <h2 class="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2 px-3">Channels</h2>
+                                <div class="space-y-1">
+                                    <button
+                                        id="channel-general"
+                                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 bg-orange-100 text-orange-700 flex items-center"
+                                        aria-pressed="true"
+                                        data-channel="general"
+                                    >
+                                        <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                        </svg>
+                                        <span class="mr-2">💬</span>
+                                        General
+                                        <span class="ml-auto bg-orange-200 text-orange-800 text-xs px-2 py-0.5 rounded-full">3</span>
+                                    </button>
+                                    
+                                    <button
+                                        id="channel-music"
+                                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-gray-700 hover:bg-gray-100 flex items-center"
+                                        aria-pressed="false"
+                                        data-channel="music"
+                                    >
+                                        <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                        </svg>
+                                        <span class="mr-2">🎵</span>
+                                        Music Events
+                                    </button>
+                                    
+                                    <button
+                                        id="channel-education"
+                                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-gray-700 hover:bg-gray-100 flex items-center"
+                                        aria-pressed="false"
+                                        data-channel="education"
+                                    >
+                                        <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                        </svg>
+                                        <span class="mr-2">📚</span>
+                                        Education
+                                    </button>
+                                    
+                                    <button
+                                        id="channel-sports"
+                                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-gray-700 hover:bg-gray-100 flex items-center"
+                                        aria-pressed="false"
+                                        data-channel="sports"
+                                    >
+                                        <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                        </svg>
+                                        <span class="mr-2">🏀</span>
+                                        Sports
+                                    </button>
+                                    
+                                    <button
+                                        id="channel-food"
+                                        class="w-full text-left px-3 py-2 rounded-lg text-sm font-medium transition-colors duration-200 text-gray-700 hover:bg-gray-100 flex items-center"
+                                        aria-pressed="false"
+                                        data-channel="food"
+                                    >
+                                        <svg class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                        </svg>
+                                        <span class="mr-2">🍕</span>
+                                        Food & Dining
+                                    </button>
+                                </div>
+                            </nav>
+                        </div>
+
+                        <!-- User Status -->
+                        <div class="p-4 border-t border-gray-200">
+                            <div class="flex items-center space-x-2">
+                                <div class="w-2 h-2 bg-green-500 rounded-full"></div>
+                                <span class="text-sm text-gray-700">Online</span>
+                            </div>
+                        </div>
+                    </aside>
+
+                    <!-- Chat Area -->
+                    <div class="flex-1 flex flex-col">
+                        <!-- Chat Header -->
+                        <header class="p-4 border-b border-gray-200 bg-white">
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <svg class="mr-2 h-5 w-5 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 20l4-16m2 16l4-16M6 9h14M4 15h14" />
+                                    </svg>
+                                    <span class="mr-2" id="channel-emoji">💬</span>
+                                    <h2 id="channel-name" class="text-lg font-semibold text-gray-900">General</h2>
+                                </div>
+                                
+                                <!-- Chat Actions -->
+                                <div class="flex items-center space-x-2">
+                                    <button
+                                        id="toggle-sidebar"
+                                        class="md:hidden p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+                                        aria-label="Toggle sidebar"
+                                    >
+                                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                        </svg>
+                                    </button>
+                                    
+                                    <button
+                                        id="chat-settings"
+                                        class="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded-lg"
+                                        aria-label="Chat settings"
+                                    >
+                                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </header>
+
+                        <!-- Messages Area -->
+                        <div id="messages-container" class="flex-1 overflow-y-auto p-4 space-y-4" role="log" aria-live="polite" aria-label="Chat messages">
+                            <!-- Message 1 -->
+                            <div class="flex space-x-3">
+                                <img
+                                    src="/placeholder.svg?height=32&width=32"
+                                    alt="Alex Chen"
+                                    class="w-8 h-8 rounded-full flex-shrink-0"
+                                    width="32"
+                                    height="32"
+                                />
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="font-medium text-gray-900 text-sm">Alex Chen</span>
+                                        <time class="text-gray-500 text-xs" datetime="2024-01-15T09:00:00">9:00 AM</time>
+                                    </div>
+                                    <p class="text-gray-700 text-sm break-words">Hey everyone! Welcome to DOS Friend's Hub chat!</p>
+                                </div>
+                            </div>
+
+                            <!-- Message 2 -->
+                            <div class="flex space-x-3">
+                                <img
+                                    src="/placeholder.svg?height=32&width=32"
+                                    alt="Sarah Johnson"
+                                    class="w-8 h-8 rounded-full flex-shrink-0"
+                                    width="32"
+                                    height="32"
+                                />
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="font-medium text-gray-900 text-sm">Sarah Johnson</span>
+                                        <time class="text-gray-500 text-xs" datetime="2024-01-15T09:05:00">9:05 AM</time>
+                                    </div>
+                                    <p class="text-gray-700 text-sm break-words">This is so cool! Love the new platform 🎉</p>
+                                </div>
+                            </div>
+
+                            <!-- Message 3 -->
+                            <div class="flex space-x-3">
+                                <img
+                                    src="/placeholder.svg?height=32&width=32"
+                                    alt="Mike Rodriguez"
+                                    class="w-8 h-8 rounded-full flex-shrink-0"
+                                    width="32"
+                                    height="32"
+                                />
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="font-medium text-gray-900 text-sm">Mike Rodriguez</span>
+                                        <time class="text-gray-500 text-xs" datetime="2024-01-15T09:10:00">9:10 AM</time>
+                                    </div>
+                                    <p class="text-gray-700 text-sm break-words">Anyone know about upcoming events this weekend?</p>
+                                </div>
+                            </div>
+
+                            <!-- Typing Indicator -->
+                            <div id="typing-indicator" class="flex space-x-3 hidden">
+                                <div class="w-8 h-8 rounded-full bg-gray-300 flex-shrink-0"></div>
+                                <div class="flex-1 min-w-0">
+                                    <div class="flex items-center space-x-2 mb-1">
+                                        <span class="font-medium text-gray-500 text-sm">Someone is typing...</span>
+                                    </div>
+                                    <div class="flex space-x-1">
+                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce"></div>
+                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.1s;"></div>
+                                        <div class="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style="animation-delay: 0.2s;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Message Input -->
+                        <div class="p-4 border-t border-gray-200 bg-white">
+                            <form id="message-form" class="flex space-x-2">
+                                <div class="flex-1 relative">
+                                    <label for="message-input" class="sr-only">Type your message</label>
+                                    <input
+                                        type="text"
+                                        id="message-input"
+                                        name="message"
+                                        placeholder="Message #general"
+                                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent pr-12"
+                                        maxlength="500"
+                                        autocomplete="off"
+                                    />
+                                    
+                                    <!-- Emoji Button -->
+                                    <button
+                                        type="button"
+                                        id="emoji-btn"
+                                        class="absolute right-2 top-1/2 transform -translate-y-1/2 p-1 text-gray-400 hover:text-gray-600 rounded"
+                                        aria-label="Add emoji"
+                                    >
+                                        <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                
+                                <button
+                                    type="submit"
+                                    id="send-btn"
+                                    class="bg-orange-500 text-white px-4 py-2 rounded-lg hover:bg-orange-600 transition-colors duration-200 flex items-center disabled:opacity-50 disabled:cursor-not-allowed"
+                                    aria-label="Send message"
+                                >
+                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
+                                    </svg>
+                                </button>
+                            </form>
+                            
+                            <!-- Character Count -->
+                            <div class="flex justify-between items-center mt-2 text-xs text-gray-500">
+                                <div class="flex items-center space-x-4">
+                                    <span>Press Enter to send, Shift+Enter for new line</span>
+                                </div>
+                                <span id="char-count">0/500</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Chat Guidelines -->
+            <div class="mt-6 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                <h2 class="text-sm font-semibold text-blue-900 mb-2">💬 Chat Guidelines</h2>
+                <ul class="text-sm text-blue-800 space-y-1">
+                    <li>• Be respectful and kind to all community members</li>
+                    <li>• Keep conversations relevant to the channel topic</li>
+                    <li>• No spam, harassment, or inappropriate content</li>
+                    <li>• Use @username to mention someone directly</li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo" class="bg-gray-900 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="/placeholder.svg?height=32&width=32" alt="DOS Logo" class="h-8 w-8" width="32" height="32">
+                        <span class="text-xl font-bold">
+                            DOS <span class="text-orange-500">Friend's Hub</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400">
+                        Connecting youth and students through local events and experiences.
+                    </p>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2024 DOS Friend's Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Emoji Picker Modal -->
+    <div id="emoji-picker" class="absolute bottom-16 right-4 bg-white border border-gray-200 rounded-lg shadow-lg p-4 hidden z-10" style="width: 300px;">
+        <div class="grid grid-cols-8 gap-2">
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="😀">😀</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="😂">😂</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="😍">😍</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="🤔">🤔</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="👍">👍</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="👎">👎</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="❤️">❤️</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="🎉">🎉</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="🔥">🔥</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="💯">💯</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="🎵">🎵</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="📚">📚</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="🏀">🏀</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="🍕">🍕</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="☕">☕</button>
+            <button class="p-2 hover:bg-gray-100 rounded text-lg" data-emoji="🌟">🌟</button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/chat.js"></script>
+</body>
+</html>

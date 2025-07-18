@@ -1,0 +1,266 @@
+/* Theme variations for DOS Friend's Hub */
+
+/* Light Theme (Default) */
+:root {
+  --theme-bg-primary: #ffffff;
+  --theme-bg-secondary: #f9fafb;
+  --theme-bg-tertiary: #f3f4f6;
+  --theme-text-primary: #111827;
+  --theme-text-secondary: #6b7280;
+  --theme-text-tertiary: #9ca3af;
+  --theme-border-primary: #e5e7eb;
+  --theme-border-secondary: #d1d5db;
+  --theme-shadow: rgba(0, 0, 0, 0.1);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --theme-bg-primary: #111827;
+  --theme-bg-secondary: #1f2937;
+  --theme-bg-tertiary: #374151;
+  --theme-text-primary: #f9fafb;
+  --theme-text-secondary: #d1d5db;
+  --theme-text-tertiary: #9ca3af;
+  --theme-border-primary: #374151;
+  --theme-border-secondary: #4b5563;
+  --theme-shadow: rgba(0, 0, 0, 0.3);
+}
+
+/* High Contrast Theme */
+[data-theme="high-contrast"] {
+  --theme-bg-primary: #ffffff;
+  --theme-bg-secondary: #ffffff;
+  --theme-bg-tertiary: #f0f0f0;
+  --theme-text-primary: #000000;
+  --theme-text-secondary: #000000;
+  --theme-text-tertiary: #333333;
+  --theme-border-primary: #000000;
+  --theme-border-secondary: #333333;
+  --theme-shadow: rgba(0, 0, 0, 0.5);
+  --primary-orange: #ff6600;
+  --secondary-teal: #008080;
+}
+
+/* Colorful Theme */
+[data-theme="colorful"] {
+  --primary-orange: #ff4500;
+  --secondary-teal: #00ced1;
+  --accent-purple: #9932cc;
+  --accent-pink: #ff1493;
+  --gradient-primary: linear-gradient(135deg, #ff4500 0%, #ff1493 50%, #9932cc 100%);
+  --gradient-secondary: linear-gradient(135deg, #00ced1 0%, #32cd32 50%, #ffd700 100%);
+}
+
+/* Minimal Theme */
+[data-theme="minimal"] {
+  --primary-orange: #666666;
+  --secondary-teal: #888888;
+  --accent-purple: #aaaaaa;
+  --accent-pink: #999999;
+  --gradient-primary: linear-gradient(135deg, #666666 0%, #888888 100%);
+  --gradient-secondary: linear-gradient(135deg, #888888 0%, #aaaaaa 100%);
+  --border-radius-soft: 4px;
+  --border-radius-medium: 6px;
+  --border-radius-large: 8px;
+}
+
+/* Theme Application Classes */
+.theme-bg-primary {
+  background-color: var(--theme-bg-primary);
+}
+
+.theme-bg-secondary {
+  background-color: var(--theme-bg-secondary);
+}
+
+.theme-bg-tertiary {
+  background-color: var(--theme-bg-tertiary);
+}
+
+.theme-text-primary {
+  color: var(--theme-text-primary);
+}
+
+.theme-text-secondary {
+  color: var(--theme-text-secondary);
+}
+
+.theme-text-tertiary {
+  color: var(--theme-text-tertiary);
+}
+
+.theme-border-primary {
+  border-color: var(--theme-border-primary);
+}
+
+.theme-border-secondary {
+  border-color: var(--theme-border-secondary);
+}
+
+/* Theme Transitions */
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 80px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--theme-bg-secondary);
+  border: 2px solid var(--theme-border-primary);
+  color: var(--theme-text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 12px var(--theme-shadow);
+}
+
+/* Theme-specific Component Styles */
+[data-theme="dark"] .card-elevated {
+  background: var(--theme-bg-secondary);
+  color: var(--theme-text-primary);
+  border: 1px solid var(--theme-border-primary);
+}
+
+[data-theme="dark"] .form-input {
+  background: var(--theme-bg-secondary);
+  color: var(--theme-text-primary);
+  border-color: var(--theme-border-primary);
+}
+
+[data-theme="dark"] .form-input:focus {
+  border-color: var(--primary-orange);
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.2);
+}
+
+[data-theme="dark"] .modal-content {
+  background: var(--theme-bg-primary);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="dark"] .chat-messages {
+  background: var(--theme-bg-secondary);
+}
+
+[data-theme="dark"] .chat-message-content {
+  background: var(--theme-bg-tertiary);
+  color: var(--theme-text-primary);
+}
+
+[data-theme="high-contrast"] .btn-gradient {
+  background: var(--primary-orange);
+  border: 2px solid var(--theme-border-primary);
+  font-weight: 700;
+}
+
+[data-theme="high-contrast"] .card-elevated {
+  border: 2px solid var(--theme-border-primary);
+  box-shadow: none;
+}
+
+[data-theme="high-contrast"] .form-input {
+  border: 2px solid var(--theme-border-primary);
+}
+
+[data-theme="high-contrast"] .form-input:focus {
+  border: 3px solid var(--primary-orange);
+  box-shadow: none;
+}
+
+/* Seasonal Themes */
+[data-theme="spring"] {
+  --primary-orange: #32cd32;
+  --secondary-teal: #98fb98;
+  --accent-purple: #dda0dd;
+  --accent-pink: #ffb6c1;
+  --gradient-primary: linear-gradient(135deg, #32cd32 0%, #98fb98 100%);
+}
+
+[data-theme="summer"] {
+  --primary-orange: #ffa500;
+  --secondary-teal: #40e0d0;
+  --accent-purple: #ff6347;
+  --accent-pink: #ff69b4;
+  --gradient-primary: linear-gradient(135deg, #ffa500 0%, #ff6347 100%);
+}
+
+[data-theme="autumn"] {
+  --primary-orange: #d2691e;
+  --secondary-teal: #cd853f;
+  --accent-purple: #a0522d;
+  --accent-pink: #daa520;
+  --gradient-primary: linear-gradient(135deg, #d2691e 0%, #cd853f 100%);
+}
+
+[data-theme="winter"] {
+  --primary-orange: #4682b4;
+  --secondary-teal: #87ceeb;
+  --accent-purple: #6495ed;
+  --accent-pink: #b0c4de;
+  --gradient-primary: linear-gradient(135deg, #4682b4 0%, #87ceeb 100%);
+}
+
+/* System Preference Detection */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --theme-bg-primary: #111827;
+    --theme-bg-secondary: #1f2937;
+    --theme-bg-tertiary: #374151;
+    --theme-text-primary: #f9fafb;
+    --theme-text-secondary: #d1d5db;
+    --theme-text-tertiary: #9ca3af;
+    --theme-border-primary: #374151;
+    --theme-border-secondary: #4b5563;
+    --theme-shadow: rgba(0, 0, 0, 0.3);
+  }
+}
+
+@media (prefers-contrast: high) {
+  :root:not([data-theme]) {
+    --theme-border-primary: #000000;
+    --theme-border-secondary: #333333;
+    --primary-orange: #ff6600;
+  }
+}
+
+/* Theme Animation */
+@keyframes themeTransition {
+  0% {
+    opacity: 0.8;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+[data-theme] {
+  animation: themeTransition 0.5s ease-in-out;
+}
+
+/* Print Theme Override */
+@media print {
+  [data-theme] {
+    --theme-bg-primary: white;
+    --theme-bg-secondary: white;
+    --theme-bg-tertiary: white;
+    --theme-text-primary: black;
+    --theme-text-secondary: black;
+    --theme-text-tertiary: black;
+    --theme-border-primary: black;
+    --theme-border-secondary: black;
+  }
+}

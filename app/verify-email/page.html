@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Email - DOS Friend's Hub</title>
+    <meta name="description" content="Verify your email address to complete your DOS Friend's Hub account setup and access all features.">
+    <link rel="canonical" href="https://dosfriendshub.com/verify-email">
+    <meta name="robots" content="noindex, nofollow">
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Skip to main content -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-orange-500 text-white px-4 py-2 rounded-lg z-50">
+        Skip to main content
+    </a>
+
+    <!-- Header -->
+    <header role="banner" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2" aria-label="DOS Friend's Hub Home">
+                        <img src="/placeholder.svg?height=40&width=40" alt="DOS Logo" class="h-10 w-10" width="40" height="40">
+                        <span class="text-2xl font-bold text-gray-900">
+                            DOS <span class="text-orange-500">Friend's Hub</span>
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <div class="max-w-md mx-auto px-4 py-16">
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-8 text-center">
+                <!-- Status Icon -->
+                <div class="mb-6" id="status-icon">
+                    <!-- Verifying State -->
+                    <div id="verifying-icon" class="hidden">
+                        <svg class="animate-spin text-orange-500 mx-auto" width="48" height="48" fill="none" viewBox="0 0 24 24">
+                            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                    </div>
+                    
+                    <!-- Success State -->
+                    <div id="success-icon" class="hidden">
+                        <svg class="text-green-500 mx-auto" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                    </div>
+                    
+                    <!-- Error State -->
+                    <div id="error-icon" class="hidden">
+                        <svg class="text-red-500 mx-auto" width="48" height="48" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </div>
+                </div>
+
+                <!-- Status Title -->
+                <h1 id="status-title" class="text-2xl font-bold mb-4">
+                    <span id="verifying-title" class="text-orange-600 hidden">Verifying Your Email...</span>
+                    <span id="success-title" class="text-green-600 hidden">Email Verified Successfully!</span>
+                    <span id="error-title" class="text-red-600 hidden">Verification Failed</span>
+                </h1>
+
+                <!-- Status Message -->
+                <p id="status-message" class="text-gray-600 mb-6">
+                    <span id="verifying-message" class="hidden">Please wait while we verify your email address...</span>
+                    <span id="success-message" class="hidden">Your email has been verified and your account is now active. You can now access all features!</span>
+                    <span id="error-message" class="hidden">The verification link may have expired or is invalid.</span>
+                </p>
+
+                <!-- Success Actions -->
+                <div id="success-actions" class="space-y-4 hidden">
+                    <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                        <p class="text-green-800 text-sm">
+                            🎉 Welcome to DOS Friend's Hub! You can now access all features including creating events, RSVPing, and chatting with the community.
+                        </p>
+                    </div>
+                    <p class="text-sm text-gray-500">Redirecting you to the homepage in <span id="countdown">5</span> seconds...</p>
+                    <button
+                        id="go-home-btn"
+                        class="bg-orange-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-orange-600 transition-colors duration-200"
+                    >
+                        Go to Homepage Now
+                    </button>
+                </div>
+
+                <!-- Error Actions -->
+                <div id="error-actions" class="space-y-4 hidden">
+                    <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                        <p class="text-red-800 text-sm">
+                            The verification link may have expired or is invalid. You can request a new verification email below.
+                        </p>
+                    </div>
+                    
+                    <form id="resend-form" class="space-y-4">
+                        <div>
+                            <label for="email-input" class="block text-sm font-medium text-gray-700 mb-2">
+                                Email Address
+                            </label>
+                            <input
+                                type="email"
+                                id="email-input"
+                                name="email"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                placeholder="Enter your email address"
+                            />
+                        </div>
+                        
+                        <button
+                            type="submit"
+                            id="resend-btn"
+                            class="w-full bg-orange-500 text-white px-6 py-2 rounded-lg font-medium hover:bg-orange-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                        >
+                            <svg id="resend-spinner" class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            <svg id="resend-icon" class="mr-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                            </svg>
+                            <span id="resend-text">Resend Verification Email</span>
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Verifying State -->
+                <div id="verifying-actions" class="hidden">
+                    <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                        <p class="text-orange-800 text-sm">Please wait while we verify your email address...</p>
+                    </div>
+                </div>
+
+                <!-- Back to Home Link -->
+                <div class="mt-6">
+                    <a href="/" class="text-orange-500 hover:text-orange-600 text-sm font-medium">
+                        ← Back to Homepage
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer role="contentinfo" class="bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="text-center">
+                <div class="flex items-center justify-center space-x-2 mb-4">
+                    <img src="/placeholder.svg?height=32&width=32" alt="DOS Logo" class="h-8 w-8" width="32" height="32">
+                    <span class="text-xl font-bold">
+                        DOS <span class="text-orange-500">Friend's Hub</span>
+                    </span>
+                </div>
+                <p class="text-gray-400">© 2024 DOS Friend's Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Toast -->
+    <div id="success-toast" class="fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50">
+        <div class="flex items-center">
+            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Verification email sent successfully!</span>
+        </div>
+    </div>
+
+    <!-- Error Toast -->
+    <div id="error-toast" class="fixed top-4 right-4 bg-red-500 text-white px-6 py-3 rounded-lg shadow-lg hidden z-50">
+        <div class="flex items-center">
+            <svg class="mr-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+            <span id="error-toast-message">An error occurred. Please try again.</span>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/verify-email.js"></script>
+</body>
+</html>

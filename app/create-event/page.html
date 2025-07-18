@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - DOS Friend's Hub</title>
+    <meta name="description" content="Create and organize your own local event. Share your passion with the community and bring people together.">
+    <link rel="canonical" href="https://dosfriendshub.com/create-event">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Create Event",
+        "description": "Create and organize local events for youth and students",
+        "url": "https://dosfriendshub.com/create-event"
+    }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Skip to main content -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-orange-500 text-white px-4 py-2 rounded-lg z-50">
+        Skip to main content
+    </a>
+
+    <!-- Header (same as homepage) -->
+    <header role="banner" class="bg-white shadow-sm border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center space-x-2" aria-label="DOS Friend's Hub Home">
+                        <img src="/placeholder.svg?height=40&width=40" alt="DOS Logo" class="h-10 w-10" width="40" height="40">
+                        <span class="text-2xl font-bold text-gray-900">
+                            DOS <span class="text-orange-500">Friend's Hub</span>
+                        </span>
+                    </a>
+                </div>
+
+                <nav role="navigation" aria-label="Main navigation" class="hidden md:flex items-center space-x-8">
+                    <a href="/" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Home</a>
+                    <a href="/categories" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Categories</a>
+                    <a href="/create-event" class="text-orange-500 px-3 py-2 rounded-md text-sm font-medium" aria-current="page">Create Event</a>
+                    <a href="/my-rsvps" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">My RSVPs</a>
+                    <a href="/chat" class="text-gray-700 hover:text-orange-500 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200">Chat</a>
+                    
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm text-gray-700">Welcome, User!</span>
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-200 transition-colors duration-200">Logout</button>
+                    </div>
+                </nav>
+
+                <button id="mobile-menu-btn" class="md:hidden p-2 rounded-md text-gray-700 hover:text-orange-500 hover:bg-gray-100" aria-label="Open mobile menu">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <div class="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <!-- Breadcrumb -->
+            <nav aria-label="Breadcrumb" class="mb-6">
+                <ol class="flex items-center space-x-2 text-sm text-gray-500">
+                    <li><a href="/" class="hover:text-orange-500">Home</a></li>
+                    <li>
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </li>
+                    <li class="text-gray-900" aria-current="page">Create Event</li>
+                </ol>
+            </nav>
+
+            <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+                <header class="mb-6">
+                    <h1 class="text-3xl font-bold text-gray-900 mb-2">Create New Event</h1>
+                    <p class="text-gray-600">Share your event with the community and bring people together around shared interests.</p>
+                </header>
+
+                <!-- Event Creation Form -->
+                <form id="create-event-form" novalidate>
+                    <fieldset class="space-y-6">
+                        <legend class="sr-only">Event Details</legend>
+
+                        <!-- Event Title -->
+                        <div>
+                            <label for="event-title" class="block text-sm font-medium text-gray-700 mb-2">
+                                Event Title <span class="text-red-500" aria-label="required">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="event-title"
+                                name="title"
+                                required
+                                maxlength="100"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                placeholder="Enter a compelling event title"
+                                aria-describedby="title-help title-error"
+                            />
+                            <p id="title-help" class="mt-1 text-sm text-gray-500">Make it catchy and descriptive (max 100 characters)</p>
+                            <p id="title-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                        </div>
+
+                        <!-- Description -->
+                        <div>
+                            <label for="event-description" class="block text-sm font-medium text-gray-700 mb-2">
+                                Description <span class="text-red-500" aria-label="required">*</span>
+                            </label>
+                            <textarea
+                                id="event-description"
+                                name="description"
+                                required
+                                rows="4"
+                                maxlength="1000"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                placeholder="Describe your event in detail..."
+                                aria-describedby="description-help description-error"
+                            ></textarea>
+                            <p id="description-help" class="mt-1 text-sm text-gray-500">Tell people what to expect, what to bring, and why they should attend (max 1000 characters)</p>
+                            <p id="description-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                        </div>
+
+                        <!-- Date and Time -->
+                        <fieldset class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <legend class="sr-only">Event Date and Time</legend>
+                            
+                            <div>
+                                <label for="event-date" class="block text-sm font-medium text-gray-700 mb-2">
+                                    <svg class="inline mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a1 1 0 011-1h6a1 1 0 011 1v4m-6 0h6m-6 0a1 1 0 00-1 1v10a1 1 0 001 1h6a1 1 0 001-1V8a1 1 0 00-1-1" />
+                                    </svg>
+                                    Date <span class="text-red-500" aria-label="required">*</span>
+                                </label>
+                                <input
+                                    type="date"
+                                    id="event-date"
+                                    name="date"
+                                    required
+                                    min=""
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                    aria-describedby="date-error"
+                                />
+                                <p id="date-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                            </div>
+                            
+                            <div>
+                                <label for="event-time" class="block text-sm font-medium text-gray-700 mb-2">
+                                    Time <span class="text-red-500" aria-label="required">*</span>
+                                </label>
+                                <input
+                                    type="time"
+                                    id="event-time"
+                                    name="time"
+                                    required
+                                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                    aria-describedby="time-error"
+                                />
+                                <p id="time-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                            </div>
+                        </fieldset>
+
+                        <!-- Location -->
+                        <div>
+                            <label for="venue-name" class="block text-sm font-medium text-gray-700 mb-2">
+                                <svg class="inline mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                                Venue Name <span class="text-red-500" aria-label="required">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="venue-name"
+                                name="location"
+                                required
+                                maxlength="100"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                placeholder="e.g., University Main Hall, Central Park"
+                                aria-describedby="venue-help venue-error"
+                            />
+                            <p id="venue-help" class="mt-1 text-sm text-gray-500">Name of the venue or location</p>
+                            <p id="venue-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                        </div>
+
+                        <!-- Address -->
+                        <div>
+                            <label for="event-address" class="block text-sm font-medium text-gray-700 mb-2">
+                                Full Address <span class="text-red-500" aria-label="required">*</span>
+                            </label>
+                            <input
+                                type="text"
+                                id="event-address"
+                                name="address"
+                                required
+                                maxlength="200"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                placeholder="123 Main St, City, State, ZIP"
+                                aria-describedby="address-help address-error"
+                            />
+                            <p id="address-help" class="mt-1 text-sm text-gray-500">Complete address including street, city, state, and ZIP code</p>
+                            <p id="address-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                        </div>
+
+                        <!-- Category -->
+                        <div>
+                            <label for="event-category" class="block text-sm font-medium text-gray-700 mb-2">
+                                <svg class="inline mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z" />
+                                </svg>
+                                Category <span class="text-red-500" aria-label="required">*</span>
+                            </label>
+                            <select
+                                id="event-category"
+                                name="category"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+                                aria-describedby="category-help category-error"
+                            >
+                                <option value="">Select a category</option>
+                                <option value="music">🎵 Music</option>
+                                <option value="education">📚 Education</option>
+                                <option value="sports">🏀 Sports</option>
+                                <option value="food">🍕 Food</option>
+                                <option value="art">🎨 Art</option>
+                                <option value="technology">💻 Technology</option>
+                                <option value="social">🎉 Social</option>
+                                <option value="volunteer">🤝 Volunteer</option>
+                            </select>
+                            <p id="category-help" class="mt-1 text-sm text-gray-500">Choose the category that best describes your event</p>
+                            <p id="category-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                        </div>
+
+                        <!-- Image Upload -->
+                        <div>
+                            <label for="event-image" class="block text-sm font-medium text-gray-700 mb-2">
+                                <svg class="inline mr-1 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+                                </svg>
+                                Event Image
+                            </label>
+                            <div class="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-orange-400 transition-colors">
+                                <div class="space-y-1 text-center">
+                                    <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                                    </svg>
+                                    <div class="flex text-sm text-gray-600">
+                                        <label for="event-image" class="relative cursor-pointer bg-white rounded-md font-medium text-orange-600 hover:text-orange-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-orange-500">
+                                            <span>Upload a file</span>
+                                            <input
+                                                id="event-image"
+                                                name="image"
+                                                type="file"
+                                                accept="image/*"
+                                                class="sr-only"
+                                                aria-describedby="image-help image-error"
+                                            />
+                                        </label>
+                                        <p class="pl-1">or drag and drop</p>
+                                    </div>
+                                    <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                                </div>
+                            </div>
+                            <p id="image-help" class="mt-1 text-sm text-gray-500">Upload an image to make your event more attractive (optional)</p>
+                            <p id="image-error" class="mt-1 text-sm text-red-600 hidden" role="alert"></p>
+                        </div>
+
+                        <!-- Image Preview -->
+                        <div id="image-preview" class="hidden">
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Image Preview</label>
+                            <div class="relative">
+                                <img id="preview-img" src="/placeholder.svg" alt="Event image preview" class="w-full h-48 object-cover rounded-lg">
+                                <button type="button" id="remove-image" class="absolute top-2 right-2 bg-red-500 text-white rounded-full p-1 hover:bg-red-600 transition-colors" aria-label="Remove image">
+                                    <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                    <!-- Form Actions -->
+                    <div class="pt-6 border-t border-gray-200 mt-8">
+                        <div class="flex justify-between">
+                            <button
+                                type="button"
+                                id="save-draft"
+                                class="bg-gray-100 text-gray-700 px-6 py-3 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200"
+                            >
+                                Save as Draft
+                            </button>
+                            <div class="flex space-x-4">
+                                <button
+                                    type="button"
+                                    id="preview-event"
+                                    class="bg-white text-gray-700 px-6 py-3 rounded-lg font-medium border border-gray-300 hover:bg-gray-50 transition-colors duration-200"
+                                >
+                                    Preview
+                                </button>
+                                <button
+                                    type="submit"
+                                    id="create-event-btn"
+                                    class="bg-orange-500 text-white px-6 py-3 rounded-lg font-medium hover:bg-orange-600 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                                >
+                                    <span id="btn-text">Create Event</span>
+                                    <svg id="btn-spinner" class="hidden animate-spin -ml-1 mr-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
+                                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <h2 class="text-lg font-semibold text-blue-900 mb-4">💡 Tips for Creating Great Events</h2>
+                <ul class="space-y-2 text-blue-800">
+                    <li class="flex items-start">
+                        <svg class="mr-2 h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Use a clear, descriptive title that tells people exactly what to expect</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="mr-2 h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Include important details like what to bring, dress code, or age requirements</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="mr-2 h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Add a high-quality image to make your event stand out</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="mr-2 h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Double-check the date, time, and address for accuracy</span>
+                    </li>
+                    <li class="flex items-start">
+                        <svg class="mr-2 h-5 w-5 text-blue-500 mt-0.5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                        </svg>
+                        <span>Choose the most appropriate category to help people find your event</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer (same as homepage) -->
+    <footer role="contentinfo" class="bg-gray-900 text-white mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-2 mb-4">
+                        <img src="/placeholder.svg?height=32&width=32" alt="DOS Logo" class="h-8 w-8" width="32" height="32">
+                        <span class="text-xl font-bold">
+                            DOS <span class="text-orange-500">Friend's Hub</span>
+                        </span>
+                    </div>
+                    <p class="text-gray-400 mb-4">
+                        Connecting youth and students through local events and experiences.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/about" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="/help" class="text-gray-400 hover:text-white transition-colors">Help Center</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Legal</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/terms" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="/privacy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2024 DOS Friend's Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 hidden" role="dialog" aria-labelledby="success-title" aria-modal="true">
+        <div class="bg-white rounded-lg shadow-xl max-w-md w-full p-6">
+            <div class="text-center">
+                <svg class="mx-auto h-12 w-12 text-green-500 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+                <h2 id="success-title" class="text-xl font-semibold text-gray-900 mb-2">Event Created Successfully!</h2>
+                <p class="text-gray-600 mb-6">Your event has been published and is now visible to the community.</p>
+                <div class="flex space-x-4">
+                    <button id="view-event" class="flex-1 bg-orange-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-orange-600 transition-colors duration-200">
+                        View Event
+                    </button>
+                    <button id="create-another" class="flex-1 bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 transition-colors duration-200">
+                        Create Another
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="/js/create-event.js"></script>
+    <script>
+        // Set minimum date to today
+        document.getElementById('event-date').min = new Date().toISOString().split('T')[0];
+    </script>
+</body>
+</html>
