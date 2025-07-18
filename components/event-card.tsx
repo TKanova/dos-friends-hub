@@ -1,54 +1,67 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Calendar, MapPin, Users } from "lucide-react"
+import { Calendar, Clock, MapPin, Users } from "lucide-react"
+
+interface Event {
+  id: string
+  name: string
+  date: string
+  time: string
+  location: string
+  description: string
+  imageUrl: string
+  category: string
+  coordinates: { lat: number; lng: number }
+  going: number
+}
 
 interface EventCardProps {
-  event: {
-    id: string
-    name: string
-    date: string
-    time: string
-    location: string
-    imageUrl: string
-    going: number
-  }
+  event: Event
 }
 
 export default function EventCard({ event }: EventCardProps) {
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300">
-      <div className="relative h-48 w-full">
-        <Image src={event.imageUrl || "/placeholder.svg"} alt={event.name} fill className="object-cover" />
-      </div>
-      <CardHeader>
-        <CardTitle className="text-xl font-semibold">{event.name}</CardTitle>
-        <CardDescription className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Calendar className="h-4 w-4" />
-          <span>
-            {event.date} at {event.time}
-          </span>
-        </CardDescription>
-        <CardDescription className="flex items-center gap-2 text-sm text-muted-foreground">
-          <MapPin className="h-4 w-4" />
-          <span>{event.location}</span>
-        </CardDescription>
+      <Link href={`/event/${event.id}`} prefetch={false}>
+        <Image
+          src={event.imageUrl || "/placeholder.svg"}
+          alt={event.name}
+          width={400}
+          height={225}
+          className="w-full h-48 object-cover"
+        />
+      </Link>
+      <CardHeader className="p-4 pb-2">
+        <CardTitle className="text-xl font-bold truncate">{event.name}</CardTitle>
+        <CardDescription className="text-sm text-gray-600">{event.category}</CardDescription>
       </CardHeader>
-      <CardContent className="flex justify-between items-center">
-        <div className="flex items-center gap-2 text-sm text-muted-foreground">
-          <Users className="h-4 w-4" />
+      <CardContent className="p-4 pt-0 text-sm text-gray-700">
+        <div className="flex items-center mb-1">
+          <Calendar className="h-4 w-4 mr-2 text-gray-500" />
+          <span>{event.date}</span>
+        </div>
+        <div className="flex items-center mb-1">
+          <Clock className="h-4 w-4 mr-2 text-gray-500" />
+          <span>{event.time}</span>
+        </div>
+        <div className="flex items-center mb-2">
+          <MapPin className="h-4 w-4 mr-2 text-gray-500" />
+          <span className="truncate">{event.location}</span>
+        </div>
+        <div className="flex items-center text-gray-600">
+          <Users className="h-4 w-4 mr-2 text-gray-500" />
           <span>{event.going} going</span>
         </div>
-        <Link href={`/event/${event.id}`} prefetch={false}>
-          <Button
-            variant="outline"
-            className="bg-transparent text-primary border-primary hover:bg-primary hover:text-primary-foreground"
-          >
+      </CardContent>
+      <CardFooter className="p-4 pt-0">
+        <Link href={`/event/${event.id}`} className="w-full" prefetch={false}>
+          <Button variant="outline" className="w-full bg-transparent">
             View Details
           </Button>
         </Link>
-      </CardContent>
+      </CardFooter>
     </Card>
   )
 }

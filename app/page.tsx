@@ -1,11 +1,14 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import EventCard from "@/components/event-card"
 import SearchFilters from "@/components/search-filters"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 import { Rocket, Users, MessageCircle, HeartHandshake } from "lucide-react" // Icons for reasons
+import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel"
+import Autoplay from "embla-carousel-autoplay"
 
 interface Event {
   id: string
@@ -101,6 +104,19 @@ const sampleEvents: Event[] = [
   },
 ]
 
+const sponsorLogos = [
+  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Abstract tech logo
+  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Modern design logo
+  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Geometric logo
+  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Minimalist logo
+  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Dynamic logo
+  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Clean logo
+  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Abstract shape logo
+  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Simple icon logo
+  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Intersecting lines logo
+  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Circular logo
+]
+
 export default function HomePage() {
   const [searchTerm, setSearchTerm] = useState("")
   const [selectedCategory, setSelectedCategory] = useState("All")
@@ -117,9 +133,9 @@ export default function HomePage() {
   const categories = ["All", ...new Set(sampleEvents.map((event) => event.category))]
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container w-full mx-auto px-4 py-8">
       {/* Hero Section */}
-      <div className="text-center space-y-4 mb-12 p-8 rounded-lg bg-gradient-to-br from-background to-muted shadow-lg">
+      <div className="text-center space-y-4 mb-12 p-8 rounded-lg bg-gradient-to-br from-background to-muted shadow-lg max-w-4xl mx-auto">
         <h1 className="text-5xl font-extrabold text-primary">Welcome DOS</h1>
         <p className="text-xl text-black max-w-2xl mx-auto">
           Find a dos or doses to enjoy events together. Comment, choose, visit on events and we'll match you with best
@@ -128,11 +144,44 @@ export default function HomePage() {
         <p className="text-lg text-gray-600">Choose from over 1,100 active events in our country</p>
       </div>
 
+      {/* Sponsor Logos Carousel */}
+      <div className="relative w-full overflow-hidden py-8 mb-12">
+        <div className="absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent z-10" />
+        <div className="absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent z-10" />
+        <Carousel
+          opts={{
+            align: "start",
+            loop: true,
+          }}
+          plugins={[
+            Autoplay({
+              delay: 2500,
+              stopOnInteraction: false,
+            }),
+          ]}
+          className="w-full"
+        >
+          <CarouselContent className="flex items-center">
+            {sponsorLogos.map((logo, index) => (
+              <CarouselItem key={index} className="basis-1/2 md:basis-1/3 lg:basis-1/5 flex justify-center">
+                <Image
+                  src={logo || "/placeholder.svg"}
+                  alt={`Sponsor Logo ${index + 1}`}
+                  width={120}
+                  height={40}
+                  className="object-contain"
+                />
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+        </Carousel>
+      </div>
+
       {/* Why find your best DOS fit? Section */}
       <section className="py-12 bg-secondary text-secondary-foreground rounded-lg mb-12">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8">Why find your best DOS fit?</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
             <div className="flex flex-col items-center space-y-4 p-6 bg-secondary/80 rounded-lg shadow-md">
               <Users className="h-12 w-12 text-primary" />
               <h3 className="text-2xl font-semibold">Connect Deeper</h3>
@@ -160,7 +209,7 @@ export default function HomePage() {
       <section className="py-12 mb-12">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-4xl font-bold mb-8">How to find the right DOS</h2>
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
             <div className="flex flex-col items-center space-y-4 p-8 bg-card rounded-lg shadow-md">
               <Users className="h-12 w-12 text-primary" />
               <h3 className="text-2xl font-semibold">Get matched</h3>
@@ -190,18 +239,22 @@ export default function HomePage() {
       </section>
 
       {/* Discover Events Section */}
-      <h2 className="text-3xl font-bold mb-6 text-center">Discover Events</h2>
-      <SearchFilters
-        searchTerm={searchTerm}
-        setSearchTerm={setSearchTerm}
-        selectedCategory={selectedCategory}
-        setSelectedCategory={setSelectedCategory}
-        categories={categories}
-      />
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {filteredEvents.map((event) => (
-          <EventCard key={event.id} event={event} />
-        ))}
+      <div className="max-w-6xl mx-auto">
+        {" "}
+        {/* Wrapper for centering */}
+        <h2 className="text-3xl font-bold mb-6 text-center">Discover Events</h2>
+        <SearchFilters
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          selectedCategory={selectedCategory}
+          setSelectedCategory={setSelectedCategory}
+          categories={categories}
+        />
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {filteredEvents.map((event) => (
+            <EventCard key={event.id} event={event} />
+          ))}
+        </div>
       </div>
     </div>
   )

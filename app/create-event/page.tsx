@@ -1,29 +1,51 @@
 "use client"
 
-import { useDosMembership } from "@/contexts/dos-membership-context"
+import type React from "react"
+
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { CalendarIcon, ClockIcon, MapPinIcon, ImagePlusIcon, TagIcon } from "lucide-react"
 
 export default function CreateEventPage() {
-  const { isDosMember } = useDosMembership()
+  const [eventName, setEventName] = useState("")
+  const [eventDate, setEventDate] = useState("")
+  const [eventTime, setEventTime] = useState("")
+  const [eventLocation, setEventLocation] = useState("")
+  const [eventDescription, setEventDescription] = useState("")
+  const [eventImage, setEventImage] = useState<File | null>(null)
+  const [eventCategory, setEventCategory] = useState("")
 
-  if (!isDosMember) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
-        <h1 className="text-3xl font-bold mb-4">Access Denied</h1>
-        <p className="text-lg text-muted-foreground mb-6">You need to be a DOS Member to create events.</p>
-        <p className="text-md text-muted-foreground mb-6">
-          Please click the "Become a DOS Member" button in the footer to gain access.
-        </p>
-        <Link href="/">
-          <Button>Go to Home</Button>
-        </Link>
-      </div>
-    )
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    // Handle event creation logic here
+    console.log({
+      eventName,
+      eventDate,
+      eventTime,
+      eventLocation,
+      eventDescription,
+      eventImage,
+      eventCategory,
+    })
+    alert("Event created successfully (simulated)!")
+    // Reset form
+    setEventName("")
+    setEventDate("")
+    setEventTime("")
+    setEventLocation("")
+    setEventDescription("")
+    setEventImage(null)
+    setEventCategory("")
+  }
+
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setEventImage(e.target.files[0])
+    }
   }
 
   return (
@@ -32,34 +54,108 @@ export default function CreateEventPage() {
         <CardHeader>
           <CardTitle className="text-3xl font-bold text-center">Create New Event</CardTitle>
         </CardHeader>
-        <CardContent className="space-y-6">
-          <div className="space-y-2">
-            <Label htmlFor="event-name">Event Name</Label>
-            <Input id="event-name" placeholder="e.g., Summer Music Festival" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="event-description">Description</Label>
-            <Textarea id="event-description" placeholder="Tell us about your event..." rows={5} />
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="event-date">Date</Label>
-              <Input id="event-date" type="date" />
+        <CardContent>
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid gap-2">
+              <Label htmlFor="eventName">Event Name</Label>
+              <Input
+                id="eventName"
+                type="text"
+                placeholder="e.g., Summer Music Festival"
+                value={eventName}
+                onChange={(e) => setEventName(e.target.value)}
+                required
+              />
             </div>
-            <div className="space-y-2">
-              <Label htmlFor="event-time">Time</Label>
-              <Input id="event-time" type="time" />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid gap-2">
+                <Label htmlFor="eventDate">Date</Label>
+                <div className="relative">
+                  <CalendarIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                  <Input
+                    id="eventDate"
+                    type="date"
+                    value={eventDate}
+                    onChange={(e) => setEventDate(e.target.value)}
+                    className="pl-9"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="grid gap-2">
+                <Label htmlFor="eventTime">Time</Label>
+                <div className="relative">
+                  <ClockIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                  <Input
+                    id="eventTime"
+                    type="time"
+                    value={eventTime}
+                    onChange={(e) => setEventTime(e.target.value)}
+                    className="pl-9"
+                    required
+                  />
+                </div>
+              </div>
             </div>
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="event-location">Location</Label>
-            <Input id="event-location" placeholder="e.g., Central Park, New York" />
-          </div>
-          <div className="space-y-2">
-            <Label htmlFor="event-image">Image URL</Label>
-            <Input id="event-image" placeholder="e.g., https://example.com/event-banner.jpg" />
-          </div>
-          <Button className="w-full bg-primary text-primary-foreground hover:bg-primary/90">Create Event</Button>
+            <div className="grid gap-2">
+              <Label htmlFor="eventLocation">Location</Label>
+              <div className="relative">
+                <MapPinIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Input
+                  id="eventLocation"
+                  type="text"
+                  placeholder="e.g., Central Park, New York"
+                  value={eventLocation}
+                  onChange={(e) => setEventLocation(e.target.value)}
+                  className="pl-9"
+                  required
+                />
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="eventCategory">Category</Label>
+              <div className="relative">
+                <TagIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Input
+                  id="eventCategory"
+                  type="text"
+                  placeholder="e.g., Music, Technology, Community"
+                  value={eventCategory}
+                  onChange={(e) => setEventCategory(e.target.value)}
+                  className="pl-9"
+                  required
+                />
+              </div>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="eventDescription">Description</Label>
+              <Textarea
+                id="eventDescription"
+                placeholder="Tell us more about your event..."
+                value={eventDescription}
+                onChange={(e) => setEventDescription(e.target.value)}
+                rows={5}
+                required
+              />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="eventImage">Event Image</Label>
+              <div className="relative">
+                <ImagePlusIcon className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
+                <Input
+                  id="eventImage"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="pl-9 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
+                />
+              </div>
+              {eventImage && <p className="text-sm text-gray-500 mt-2">Selected file: {eventImage.name}</p>}
+            </div>
+            <Button type="submit" className="w-full">
+              Create Event
+            </Button>
+          </form>
         </CardContent>
       </Card>
     </div>

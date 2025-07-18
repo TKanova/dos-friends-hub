@@ -1,63 +1,100 @@
 "use client"
 
-import { useDosMembership } from "@/contexts/dos-membership-context"
-import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import { MountainIcon } from "lucide-react"
+import { Separator } from "@/components/ui/separator"
+import { Facebook, Instagram, Twitter } from "lucide-react"
 
-export default function Footer() {
-  const { isDosMember, becomeDosMember } = useDosMembership()
-
+export function Footer() {
   return (
-    <footer className="bg-secondary text-secondary-foreground py-8 px-6 mt-12">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div className="space-y-4">
-          <Link href="/" className="flex items-center gap-2" prefetch={false}>
-            <MountainIcon className="h-6 w-6" />
-            <span className="text-lg font-semibold">DOS – Friend’s Hub</span>
+    <footer className="bg-gray-100 p-6 md:py-12 w-full dark:bg-gray-800">
+      <div className="container max-w-7xl grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 text-sm">
+        <div className="grid gap-1">
+          <h3 className="font-semibold">Company</h3>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            About Us
           </Link>
-          <p className="text-sm">Connecting friends through unforgettable events.</p>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Our Team
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Careers
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            News
+          </Link>
         </div>
-
-        <div className="space-y-2">
-          <h3 className="text-lg font-semibold mb-2">Quick Links</h3>
-          <ul className="space-y-1">
-            <li>
-              <Link href="/" className="hover:underline" prefetch={false}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link href="/create-event" className="hover:underline" prefetch={false}>
-                Create Event
-              </Link>
-            </li>
-            <li>
-              <Link href="/my-rsvps" className="hover:underline" prefetch={false}>
-                My RSVPs
-              </Link>
-            </li>
-            <li>
-              <Link href="/chat" className="hover:underline" prefetch={false}>
-                Chat
-              </Link>
-            </li>
-          </ul>
+        <div className="grid gap-1">
+          <h3 className="font-semibold">Product</h3>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Features
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Pricing
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Integrations
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Security
+          </Link>
         </div>
-
-        <div className="space-y-4">
-          <h3 className="text-lg font-semibold mb-2">Become a DOS Member</h3>
-          <p className="text-sm">Unlock full features like commenting, RSVPs, and chat access.</p>
-          {!isDosMember && (
-            <Button onClick={becomeDosMember} className="bg-primary text-primary-foreground hover:bg-primary/90">
-              Get Started - It's Free!
-            </Button>
-          )}
-          {isDosMember && <p className="text-sm text-green-300">You are already a DOS Member!</p>}
+        <div className="grid gap-1">
+          <h3 className="font-semibold">Resources</h3>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Blog
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Help Center
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Tutorials
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            FAQs
+          </Link>
+        </div>
+        <div className="grid gap-1">
+          <h3 className="font-semibold">Legal</h3>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Privacy Policy
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Terms of Service
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Cookie Policy
+          </Link>
+        </div>
+        <div className="grid gap-1">
+          <h3 className="font-semibold">Contact</h3>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Support
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Sales
+          </Link>
+          <Link className="text-gray-600 hover:underline dark:text-gray-400" href="#">
+            Partnerships
+          </Link>
         </div>
       </div>
-      <div className="border-t border-secondary-foreground/20 mt-8 pt-4 text-center text-sm">
-        &copy; {new Date().getFullYear()} DOS – Friend’s Hub. All rights reserved.
+      <Separator className="my-8" />
+      <div className="container max-w-7xl flex flex-col sm:flex-row items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+        <p>© 2024 DOS – Friend's Hub. All rights reserved.</p>
+        <div className="flex gap-4 mt-4 sm:mt-0">
+          <Link className="hover:text-gray-900 dark:hover:text-gray-50" href="#">
+            <Twitter className="h-5 w-5" />
+            <span className="sr-only">Twitter</span>
+          </Link>
+          <Link className="hover:text-gray-900 dark:hover:text-gray-50" href="#">
+            <Facebook className="h-5 w-5" />
+            <span className="sr-only">Facebook</span>
+          </Link>
+          <Link className="hover:text-gray-900 dark:hover:text-gray-50" href="#">
+            <Instagram className="h-5 w-5" />
+            <span className="sr-only">Instagram</span>
+          </Link>
+        </div>
       </div>
     </footer>
   )

@@ -1,46 +1,35 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
-import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
+import { useDosMembership } from "@/contexts/dos-membership-context"
+import Image from "next/image"
 
-export default function Header() {
-  const pathname = usePathname()
-  const nav = [
-    { href: "/", label: "Home" },
-    { href: "/create-event", label: "Create Event" },
-    { href: "/my-rsvps", label: "My RSVPs" },
-    { href: "/chat", label: "Chat" },
-  ]
+export function Header() {
+  const { isMember, becomeMember } = useDosMembership()
 
   return (
-    <header className="border-b bg-primary text-primary-foreground">
-      <div className="container flex items-center justify-between h-16">
-        <Link href="/" className="flex items-center gap-2" prefetch={false}>
-          <Image src="/oslogo.png" alt="DOS Friends' Hub Logo" width={40} height={40} className="rounded-md" />
-          <span className="font-bold text-xl">DOS Hub</span>
+    <header className="px-4 lg:px-6 h-14 flex items-center justify-between bg-background border-b">
+      <Link href="/" className="flex items-center justify-center" prefetch={false}>
+        <Image src="/oslogo.png" alt="DOS Logo" width={32} height={32} className="h-8 w-8" />
+        <span className="sr-only">DOS – Friend's Hub</span>
+      </Link>
+      <nav className="flex gap-4 sm:gap-6">
+        <Link href="/create-event" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          Create Event
         </Link>
-
-        <nav className="hidden sm:flex gap-6">
-          {nav.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className={`hover:underline ${pathname === n.href ? "font-semibold" : ""}`}
-              prefetch={false}
-            >
-              {n.label}
-            </Link>
-          ))}
-        </nav>
-
+        <Link href="/my-rsvps" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          My RSVPs
+        </Link>
+        <Link href="/chat" className="text-sm font-medium hover:underline underline-offset-4" prefetch={false}>
+          Chat
+        </Link>
+      </nav>
+      {!isMember && (
         <Link href="/about-membership" prefetch={false}>
-          <Button className="bg-secondary text-secondary-foreground hover:bg-secondary/90">
-            Get started - it's free
-          </Button>
+          <Button variant="default">Get started - it's free</Button>
         </Link>
-      </div>
+      )}
     </header>
   )
 }
