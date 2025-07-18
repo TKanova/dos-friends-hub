@@ -29,12 +29,11 @@ const sampleEvents: Event[] = [
     name: "Summer Music Festival",
     date: "2024-08-15",
     time: "18:00",
-    location: "Central Park, New York",
+    location: "Central Park, Almaty",
     description: "An annual music festival featuring various genres and artists.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1514525253164-ff44ce820118?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageUrl: "/images/summer-music-festival.png",
     category: "Music",
-    coordinates: { lat: 40.785091, lng: -73.968285 },
+    coordinates: { lat: 43.2565, lng: 76.95 },
     going: 120,
   },
   {
@@ -42,12 +41,11 @@ const sampleEvents: Event[] = [
     name: "Local Farmers Market",
     date: "2024-08-20",
     time: "09:00",
-    location: "Union Square, San Francisco",
+    location: "Arbat, Almaty",
     description: "Fresh produce, artisanal goods, and local crafts.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1587054867758-a405ad471937?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageUrl: "/images/local-farmers-market.png",
     category: "Community",
-    coordinates: { lat: 37.787994, lng: -122.407437 },
+    coordinates: { lat: 43.2567, lng: 76.94 },
     going: 50,
   },
   {
@@ -55,12 +53,11 @@ const sampleEvents: Event[] = [
     name: "Tech Innovators Meetup",
     date: "2024-09-01",
     time: "10:00",
-    location: "Innovation Hub, San Francisco",
+    location: "Astana Hub, Astana",
     description: "Networking event for tech enthusiasts and professionals.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1556761175-5974ddf47dc3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageUrl: "/images/tech-innovators-meetup.png",
     category: "Technology",
-    coordinates: { lat: 37.7749, lng: -122.4194 },
+    coordinates: { lat: 51.1234, lng: 71.4123 },
     going: 80,
   },
   {
@@ -68,12 +65,12 @@ const sampleEvents: Event[] = [
     name: "Yoga in the Park",
     date: "2024-08-25",
     time: "07:30",
-    location: "Golden Gate Park, San Francisco",
+    location: "First President's Park, Almaty",
     description: "Start your day with a refreshing outdoor yoga session.",
     imageUrl:
       "https://images.unsplash.com/photo-1545389336-cf090694435e?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     category: "Wellness",
-    coordinates: { lat: 37.7694, lng: -122.4862 },
+    coordinates: { lat: 43.1989, lng: 76.8694 },
     going: 30,
   },
   {
@@ -81,12 +78,11 @@ const sampleEvents: Event[] = [
     name: "Art Exhibition: Modern Visions",
     date: "2024-09-10",
     time: "14:00",
-    location: "Museum of Modern Art, New York",
+    location: "Kasteyev State Museum of Arts, Almaty",
     description: "Explore contemporary art from emerging and established artists.",
-    imageUrl:
-      "https://images.unsplash.com/photo-1501443766828-857b77747fa4?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    imageUrl: "/images/art-exhibition-modern-visions.png",
     category: "Art",
-    coordinates: { lat: 40.7614, lng: -73.9776 },
+    coordinates: { lat: 43.2367, lng: 76.92 },
     going: 65,
   },
   {
@@ -105,16 +101,16 @@ const sampleEvents: Event[] = [
 ]
 
 const sponsorLogos = [
-  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Abstract tech logo
-  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Modern design logo
-  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Geometric logo
-  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Minimalist logo
-  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Dynamic logo
-  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Clean logo
-  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Abstract shape logo
-  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Simple icon logo
-  "https://images.unsplash.com/photo-1517292987717-0639cd99475f?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Intersecting lines logo
-  "https://images.unsplash.com/photo-1517032207800-b82070f01700?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", // Circular logo
+  "/images/sponsor-logo-1.png",
+  "/images/sponsor-logo-2.png",
+  "/images/sponsor-logo-3.png",
+  "/images/sponsor-logo-4.png",
+  "/images/sponsor-logo-5.png",
+  "/images/sponsor-logo-6.png",
+  "/images/sponsor-logo-7.png",
+  "/images/sponsor-logo-8.png",
+  "/images/sponsor-logo-9.png",
+  "/images/sponsor-logo-10.png",
 ]
 
 export default function HomePage() {

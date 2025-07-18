@@ -3,6 +3,7 @@
 import { Input } from "@/components/ui/input"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Search, Tag } from "lucide-react"
+import { useCity } from "@/contexts/city-context" // Import useCity
 
 interface SearchFiltersProps {
   searchTerm: string
@@ -19,13 +20,15 @@ export default function SearchFilters({
   setSelectedCategory,
   categories,
 }: SearchFiltersProps) {
+  const { selectedCity } = useCity() // Access selected city from context
+
   return (
     <div className="flex flex-col sm:flex-row gap-4 mb-8">
       <div className="relative flex-grow">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-gray-500" />
         <Input
           type="text"
-          placeholder="Search events by name, location, or description..."
+          placeholder={`Search events in ${selectedCity}...`} // Dynamic placeholder
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
           className="pl-9 w-full"

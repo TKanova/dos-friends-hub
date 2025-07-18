@@ -9,6 +9,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { CalendarIcon, ClockIcon, MapPinIcon, ImagePlusIcon, TagIcon } from "lucide-react"
+import { useDosMembership } from "@/contexts/dos-membership-context"
+import Link from "next/link"
 
 export default function CreateEventPage() {
   const [eventName, setEventName] = useState("")
@@ -18,6 +20,27 @@ export default function CreateEventPage() {
   const [eventDescription, setEventDescription] = useState("")
   const [eventImage, setEventImage] = useState<File | null>(null)
   const [eventCategory, setEventCategory] = useState("")
+
+  const { isMember } = useDosMembership()
+
+  if (!isMember) {
+    return (
+      <div className="container mx-auto px-4 py-12 text-center">
+        <Card className="max-w-md mx-auto p-6">
+          <CardHeader>
+            <CardTitle className="text-2xl font-bold text-destructive">Access Denied</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-lg text-muted-foreground">You need to be a DOS Member to create events.</p>
+            <p className="text-muted-foreground">Please become a member to unlock this feature.</p>
+            <Button asChild className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Link href="/about-membership">Become a DOS Member</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      </div>
+    )
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -104,7 +127,7 @@ export default function CreateEventPage() {
                 <Input
                   id="eventLocation"
                   type="text"
-                  placeholder="e.g., Central Park, New York"
+                  placeholder="e.g., Central Park, Almaty"
                   value={eventLocation}
                   onChange={(e) => setEventLocation(e.target.value)}
                   className="pl-9"
